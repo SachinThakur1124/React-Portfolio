@@ -1,0 +1,131 @@
+@import "../../app.scss";
+
+.about {
+    position: relative;
+    height: calc(100vh - 100px);
+    width: 100%;
+    display: flex;
+
+    @include mobile{
+       flex-direction: column;
+    }
+
+    .h {
+        position: absolute;
+        top: 0;
+        left: 70%;
+        margin-bottom: 10px;
+        transform: translateX(-50%);
+        padding-top: 10px;
+        color: orange;
+        text-align: center;
+        font-size: 36px;
+        text-decoration: underline;
+
+        @include mobile{
+           font-size: 15px;
+           transform: translateX(-127%);
+           margin-top: 30px;
+        }
+    }
+
+    .imageContainer {
+        flex: 1;
+        position: relative;
+
+    
+        
+        img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            
+            @include mobile{ 
+                padding-top: 134%;
+                margin-top: 40px;
+                margin-left: 20px;
+                object-fit: contain;
+                height: 85%;
+            
+            }
+           
+        }
+    }
+
+    .textContainer {
+        flex: 1;
+        max-width: 800px; 
+        margin: 0 auto; 
+         padding-top: 80px;
+         padding-right: 50px;
+        box-sizing: border-box;
+
+        @include mobile{
+            padding-top: 52%;
+           margin-top: -280%;
+           padding-left: 30px;
+          
+           
+        }
+
+        p{
+            padding-top: 30px;
+            font-size: 1rem;
+            margin-bottom: -20px;
+            padding-bottom: 16px;
+
+            @include mobile{
+                font-size: 10px;
+                padding-top: 35px;
+            }
+            
+
+        }
+        b{
+            color: orange;   
+            @include mobile{
+               font-size: 10px;
+            }
+
+        }
+       ul{
+           margin-bottom: -20px;
+           @include mobile{
+            font-size: 12px;
+            margin-bottom: -24px;
+         } 
+
+        li{
+            margin-top: 5px;
+            padding-top: 3px;
+            @include mobile{
+                font-size: 12px;
+                margin-bottom: -6px;
+             }   
+        }
+    }
+
+        strong{
+            color: orange;
+
+            @include mobile{
+              font-size: 12px;
+                
+             }
+        }
+        h3{
+            text-decoration: underline;
+            color: orange;
+            padding-top: 10px;
+            margin-bottom: -43px;
+            padding-bottom: 19px;
+            font-size: 1.2rem;
+
+            @include mobile{
+               font-size: 10px;
+               padding-top: 14px;
+               padding-bottom: 13px;
+             }
+        }
+    }
+}
