@@ -1,0 +1,236 @@
+@import '../../styles/tokens.scss';
+
+.skills-section {
+  position: relative;
+  background-color: $bg-primary;
+  padding-top: $section-padding-desktop;
+  padding-bottom: $section-padding-desktop;
+  overflow: hidden;
+
+  @include tablet {
+    padding-top: $section-padding-tablet;
+    padding-bottom: $section-padding-tablet;
+  }
+
+  @include mobile {
+    padding-top: $section-padding-mobile;
+    padding-bottom: $section-padding-mobile;
+  }
+}
+
+.skills-container {
+  @include container;
+}
+
+// -----------------------------------------------------------------------------
+// Section Header
+// -----------------------------------------------------------------------------
+.skills-header {
+  margin-bottom: 56px;
+  max-width: 720px;
+
+  @include mobile {
+    margin-bottom: 36px;
+  }
+
+  &__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: $font-weight-medium;
+    color: $accent;
+    letter-spacing: 0.12em;
+    margin-bottom: 14px;
+  }
+
+  &__title {
+    font-size: 42px;
+    font-weight: $font-weight-bold;
+    line-height: 1.18;
+    letter-spacing: -0.025em;
+    color: $text-primary;
+    margin-bottom: 16px;
+
+    @include tablet {
+      font-size: 36px;
+    }
+
+    @include mobile {
+      font-size: 28px;
+    }
+  }
+
+  &__highlight {
+    background: linear-gradient(180deg, #FFFFFF 20%, #93C5FD 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  &__description {
+    font-size: 16.5px;
+    line-height: 1.65;
+    color: $text-secondary;
+
+    @include mobile {
+      font-size: 15px;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Skills Grid Layout
+// -----------------------------------------------------------------------------
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Category Card
+// -----------------------------------------------------------------------------
+.skill-category-card {
+  background-color: $bg-secondary;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-lg;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  transition: border-color $transition-base, transform $transition-base, box-shadow $transition-base;
+
+  @include mobile {
+    padding: 20px 16px;
+  }
+
+  @media (max-width: 380px) {
+    padding: 16px 14px;
+    gap: 16px;
+  }
+
+  &:hover {
+    border-color: rgba(59, 130, 246, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), 0 0 20px rgba(59, 130, 246, 0.06);
+  }
+
+  // Row 1: Frontend & Backend (6 cols each on desktop)
+  &--frontend {
+    grid-column: span 6;
+    @include tablet { grid-column: span 1; }
+    @include mobile { grid-column: span 1; }
+  }
+
+  &--backend {
+    grid-column: span 6;
+    @include tablet { grid-column: span 1; }
+    @include mobile { grid-column: span 1; }
+  }
+
+  // Row 2: Databases, Cloud & AI (4 cols each on desktop)
+  &--databases {
+    grid-column: span 4;
+    @include tablet { grid-column: span 1; }
+    @include mobile { grid-column: span 1; }
+  }
+
+  &--cloud-devops {
+    grid-column: span 4;
+    @include tablet { grid-column: span 1; }
+    @include mobile { grid-column: span 1; }
+  }
+
+  &--ai-engineering {
+    grid-column: span 4;
+    border-color: rgba(59, 130, 246, 0.22);
+    @include tablet { grid-column: span 2; }
+    @include mobile { grid-column: span 1; }
+  }
+}
+
+.skill-category-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skill-category-title {
+  font-size: 20px;
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+  letter-spacing: -0.015em;
+}
+
+.skill-category-desc {
+  font-size: 13.5px;
+  color: $text-secondary;
+  line-height: 1.55;
+}
+
+// -----------------------------------------------------------------------------
+// Skill Pills
+// -----------------------------------------------------------------------------
+.skill-pills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skill-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background-color: $bg-tertiary;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  transition: all $transition-fast;
+
+  @include mobile {
+    padding: 6px 10px;
+    gap: 6px;
+  }
+
+  @media (max-width: 380px) {
+    padding: 5px 8px;
+    gap: 5px;
+  }
+
+  &:hover {
+    border-color: rgba(59, 130, 246, 0.4);
+    background-color: rgba(59, 130, 246, 0.08);
+    transform: translateY(-1px);
+  }
+
+  &__icon {
+    font-size: 15px;
+    color: $accent;
+    flex-shrink: 0;
+
+    @media (max-width: 380px) {
+      font-size: 13px;
+    }
+  }
+
+  &__name {
+    font-size: 12.5px;
+    color: $text-primary;
+    white-space: nowrap;
+
+    @media (max-width: 380px) {
+      font-size: 11.5px;
+    }
+  }
+}

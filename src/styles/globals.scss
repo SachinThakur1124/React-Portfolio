@@ -1,0 +1,136 @@
+@import './tokens.scss';
+
+// =============================================================================
+// Obsidian Design System — Global Styles & Reset
+// =============================================================================
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: $bg-primary;
+  color: $text-primary;
+}
+
+body {
+  font-family: $font-sans;
+  background-color: $bg-primary;
+  color: $text-secondary;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $bg-primary;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #27272a;
+    border-radius: $radius-full;
+
+    &:hover {
+      background: #3f3f46;
+    }
+  }
+}
+
+// Selection styling
+::selection {
+  background-color: rgba(59, 130, 246, 0.28);
+  color: $text-primary;
+}
+
+// Smooth scrolling anchor offset for fixed navbar
+section[id], [id] {
+  scroll-margin-top: 84px;
+}
+
+// Keyboard Accessibility Focus Indicator
+:focus-visible {
+  outline: 2px solid $accent;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color $transition-fast;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input, textarea, select {
+  font-family: inherit;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+// -----------------------------------------------------------------------------
+// Typography Utilities
+// -----------------------------------------------------------------------------
+.font-mono {
+  font-family: $font-mono;
+}
+
+.text-gradient {
+  background: linear-gradient(180deg, #FFFFFF 0%, #A1A1AA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-accent {
+  color: $accent;
+}
+
+// -----------------------------------------------------------------------------
+// Section Layout Standard
+// -----------------------------------------------------------------------------
+.section-wrapper {
+  padding-top: $section-padding-desktop;
+  padding-bottom: $section-padding-desktop;
+  position: relative;
+
+  @include tablet {
+    padding-top: $section-padding-tablet;
+    padding-bottom: $section-padding-tablet;
+  }
+
+  @include mobile {
+    padding-top: $section-padding-mobile;
+    padding-bottom: $section-padding-mobile;
+  }
+}
+
+.site-container {
+  @include container;
+}

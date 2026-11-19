@@ -1,158 +1,182 @@
-import React, { useEffect, useRef } from "react";
-import {  motion } from "framer-motion";
-import { init } from 'ityped';
-import "./hero.scss";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { FiArrowDown, FiArrowRight, FiGithub, FiCheckCircle } from 'react-icons/fi';
+import CTAButton from '../ui/CTAButton';
+import './hero.scss';
 
-// Animation variants for text elements
-const textVariants = {
-  initial: {
-    x: -500,
-    opacity: 0,
-  },
-  animate: {
-    x: 0,
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
     opacity: 1,
     transition: {
-      duration: 1,
-      staggerChildren: 0.1,
-    },
-  },
-  ScrollButton: {
-    opacity: 0,
-    y: 10,
-    transition: {
-      duration: 2,
-      repeat: Infinity,
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
     },
   },
 };
 
-// Animation variants for the sliding text
-const sliderVariants = {
-  initial: {
-    x: 0,
-  },
-  animate: {
-    x: "-220%",
-    transition: {
-      repeat: Infinity,
-      repeatType: "mirror",
-      duration: 20,
-    },
-  },
-};
-
-// Animation variants for images
-const imageVariants = {
-  initial: {
-    x: 500,
-    opacity: 0,
-  },
-  animate: {
-    x: 0,
+const itemVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
     opacity: 1,
+    y: 0,
     transition: {
-      duration: 1,
+      duration: 0.55,
+      ease: [0.16, 1, 0.3, 1],
     },
   },
 };
 
-// Hero functional component
+const illustrationVariants = {
+  hidden: { opacity: 0, scale: 0.94 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.7,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+};
+
+const floatingVariants = {
+  animate: {
+    y: [0, -10, 0],
+    transition: {
+      duration: 6,
+      repeat: Infinity,
+      repeatType: 'mirror',
+      ease: 'easeInOut',
+    },
+  },
+};
+
 const Hero = () => {
-  // Ref for ityped library
-  const textRef = useRef();
-
-  // useEffect to initialize ityped library
-  useEffect(() => {
-    init(textRef.current, {
-      showCursor: true,
-      backDelay: 1500,
-      backSpeed: 60,
-      strings: [
-        " Web Developer",
-        " Web Designer",
-        "Content Creator",
-        "UI Designer",
-        "Backend Developer",
-      ],
-    });
-  }, []);
-
-  // Render the Hero component
   return (
-    <div className="hero">
-      <div className="wrapper">
-        {/* Motion div for text container */}
+    <section className="hero-section" id="Home">
+      <div className="hero-ambient-glow" />
+
+      <div className="hero-container">
         <motion.div
-          className="textContainer"
-          variants={textVariants}
-          initial="initial"
-          animate="animate"
+          className="hero-grid"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
         >
-          {/* Motion heading with variants */}
-          <motion.h2 variants={textVariants}>SACHIN THAKUR</motion.h2>
-          {/* Motion heading with variants and ityped library */}
-          <motion.h3 variants={textVariants}>
-            I'm a <span ref={textRef}></span>
-          </motion.h3>
-          {/* Motion div for buttons with variants */}
-          <motion.div className="buttons" variants={textVariants}>
-            {/* Motion button with hover and tap animations */}
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              variants={textVariants}
+          {/* Left Column: Introduction & CTAs */}
+          <div className="hero-content">
+            {/* Status Badge */}
+            <motion.div className="hero-badge" variants={itemVariants}>
+              <span className="hero-badge__dot" />
+              <span className="hero-badge__text">
+                Full-Stack Software Engineer · MERN &amp; AI
+              </span>
+            </motion.div>
+
+            {/* Main Headline */}
+            <motion.h1 className="hero-title" variants={itemVariants}>
+              Architecting <span className="hero-title__highlight">Scalable Web Systems</span> &amp; Intelligent Applications.
+            </motion.h1>
+
+            {/* Supporting Pitch */}
+            <motion.p className="hero-description" variants={itemVariants}>
+              I'm <strong className="hero-description__name">Sachin Thakur</strong>, a Full-Stack Engineer with{' '}
+              <strong className="hero-description__highlight">2.4+ years</strong> of professional experience delivering
+              robust MERN stack architectures, high-performance REST APIs, and generative AI &amp; RAG workflows.
+            </motion.p>
+
+            {/* Key Verified Highlights Pills */}
+            <motion.div className="hero-metrics-strip" variants={itemVariants}>
+              <div className="hero-metric-item">
+                <FiCheckCircle className="hero-metric-item__icon" />
+                <span>6+ Apps Shipped</span>
+              </div>
+              <div className="hero-metric-item">
+                <FiCheckCircle className="hero-metric-item__icon" />
+                <span>10+ REST Integrations</span>
+              </div>
+              <div className="hero-metric-item">
+                <FiCheckCircle className="hero-metric-item__icon" />
+                <span>~30% Performance Boost</span>
+              </div>
+            </motion.div>
+
+            {/* Action Buttons */}
+            <motion.div className="hero-actions" variants={itemVariants}>
+              <CTAButton
+                href="#Portfolio"
+                variant="primary"
+                size="lg"
+                icon={FiArrowRight}
+                iconPosition="right"
+              >
+                View Featured Work
+              </CTAButton>
+
+              <CTAButton
+                href="#contact"
+                variant="secondary"
+                size="lg"
+              >
+                Get in Touch
+              </CTAButton>
+
+              <CTAButton
+                href="https://github.com/SachinThakur1124"
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="ghost"
+                size="lg"
+                icon={FiGithub}
+                iconPosition="left"
+              >
+                GitHub
+              </CTAButton>
+            </motion.div>
+          </div>
+
+          {/* Right Column: Developer Vector Illustration */}
+          <motion.div
+            className="hero-visual"
+            variants={illustrationVariants}
+          >
+            <motion.div
+              className="hero-visual__wrapper"
+              variants={floatingVariants}
+              animate="animate"
             >
-              See the latest work
-            </motion.button>
-            {/* Motion button with hover and tap animations */}
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              variants={textVariants}
-            >
-              Contact Me
-            </motion.button>
-            {/* Motion button with hover and tap animations */}
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              variants={textVariants}
-            >
-              Download CV
-            </motion.button>
+              <img
+                src="/assets/developer-workspace.svg"
+                alt="Developer workstation coding interface illustration"
+                className="hero-visual__image"
+                width="680"
+                height="540"
+              />
+            </motion.div>
           </motion.div>
-          {/* Motion image for scroll button with variants */}
-          <motion.img
-            variants={textVariants}
-            animate="ScrollButton"
-            src="/scroll.png"
-            alt=""
-          />
         </motion.div>
+
+        {/* Scroll Indicator */}
+        <motion.a
+          href="#Portfolio"
+          className="hero-scroll"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 0.5 }}
+          aria-label="Scroll down to projects"
+        >
+          <span className="hero-scroll__text">EXPLORE</span>
+          <motion.div
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <FiArrowDown className="hero-scroll__icon" />
+          </motion.div>
+        </motion.a>
       </div>
-      {/* Motion div for sliding text with variants */}
-      <motion.div
-        className="slidingTextContainer"
-        variants={sliderVariants}
-        initial="initial"
-        animate="animate"
-      >
-        Full Stack Developer
-      </motion.div>
-      {/* Motion div for image container with variants */}
-      <motion.div
-        variants={imageVariants}
-        animate="animate"
-        initial="initial"
-        className="imageContainer"
-      >
-        {/* Motion image with variants */}
-        <motion.img variants={imageVariants} src="/sachin.png" alt="" />
-      </motion.div>
-    </div>
+    </section>
   );
 };
 
-// Export the Hero component as the default export
 export default Hero;

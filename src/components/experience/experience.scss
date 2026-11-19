@@ -1,0 +1,415 @@
+@import '../../styles/tokens.scss';
+
+.experience-section {
+  position: relative;
+  background-color: $bg-primary;
+  padding-top: $section-padding-desktop;
+  padding-bottom: $section-padding-desktop;
+  overflow: hidden;
+
+  @include tablet {
+    padding-top: $section-padding-tablet;
+    padding-bottom: $section-padding-tablet;
+  }
+
+  @include mobile {
+    padding-top: $section-padding-mobile;
+    padding-bottom: $section-padding-mobile;
+  }
+}
+
+.experience-container {
+  @include container;
+}
+
+// -----------------------------------------------------------------------------
+// Section Header
+// -----------------------------------------------------------------------------
+.experience-header {
+  margin-bottom: 56px;
+  max-width: 720px;
+
+  @include mobile {
+    margin-bottom: 36px;
+  }
+
+  &__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: $font-weight-medium;
+    color: $accent;
+    letter-spacing: 0.12em;
+    margin-bottom: 14px;
+  }
+
+  &__title {
+    font-size: 42px;
+    font-weight: $font-weight-bold;
+    line-height: 1.18;
+    letter-spacing: -0.025em;
+    color: $text-primary;
+    margin-bottom: 16px;
+
+    @include tablet {
+      font-size: 36px;
+    }
+
+    @include mobile {
+      font-size: 28px;
+    }
+  }
+
+  &__highlight {
+    background: linear-gradient(180deg, #FFFFFF 20%, #93C5FD 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  &__description {
+    font-size: 16.5px;
+    line-height: 1.65;
+    color: $text-secondary;
+
+    @include mobile {
+      font-size: 15px;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Layout (Commercial Experience Timeline)
+// -----------------------------------------------------------------------------
+.experience-layout {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.experience-column {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.column-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: $font-weight-medium;
+  color: $text-tertiary;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 24px;
+
+  &__icon {
+    color: $accent;
+    font-size: 16px;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Experience Cards Timeline
+// -----------------------------------------------------------------------------
+.timeline-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.timeline-card {
+  background-color: $bg-secondary;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-lg;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transition: border-color $transition-base, transform $transition-base, box-shadow $transition-base;
+
+  @include mobile {
+    padding: 20px 16px;
+    gap: 16px;
+  }
+
+  @media (max-width: 380px) {
+    padding: 16px 12px;
+  }
+
+  &:hover {
+    border-color: rgba(59, 130, 246, 0.35);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), 0 0 20px rgba(59, 130, 246, 0.06);
+  }
+
+  &--current {
+    border-color: rgba(59, 130, 246, 0.28);
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  &__summary {
+    font-size: 14.5px;
+    color: $text-secondary;
+    line-height: 1.6;
+  }
+
+  &__achievements {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px;
+    background-color: rgba(26, 26, 30, 0.45);
+    border: 1px solid $border-subtle;
+    border-radius: $radius-md;
+
+    .achievements-heading {
+      font-size: 11px;
+      color: $text-tertiary;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .achievements-checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .achievement-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13.5px;
+      color: $text-secondary;
+      line-height: 1.5;
+
+      &__icon {
+        color: $accent;
+        font-size: 15px;
+        margin-top: 3px;
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  &__tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
+
+.role-company-row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 6px;
+
+  .timeline-role {
+    font-size: 20px;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    letter-spacing: -0.01em;
+
+    @include mobile {
+      font-size: 18px;
+    }
+  }
+
+  .role-at {
+    color: $accent;
+    font-size: 14px;
+  }
+
+  .timeline-company {
+    font-size: 17px;
+    font-weight: $font-weight-semibold;
+    color: #93C5FD;
+
+    @include mobile {
+      font-size: 15px;
+    }
+  }
+}
+
+.timeline-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 12px;
+  color: $text-tertiary;
+
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+}
+
+.current-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #10B981;
+  background-color: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 3px 10px;
+  border-radius: $radius-full;
+
+  &__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #10B981;
+  }
+}
+
+.tech-chip {
+  font-size: 11.5px;
+  color: $text-secondary;
+  background-color: $bg-tertiary;
+  border: 1px solid $border-subtle;
+  padding: 3px 9px;
+  border-radius: $radius-sm;
+}
+
+// -----------------------------------------------------------------------------
+// Education Card
+// -----------------------------------------------------------------------------
+.education-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.education-card {
+  background-color: $bg-secondary;
+  border: 1px solid rgba(59, 130, 246, 0.22);
+  border-radius: $radius-lg;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+
+  @include mobile {
+    padding: 22px 16px;
+  }
+
+  @media (max-width: 380px) {
+    padding: 18px 12px;
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .education-badge {
+    font-size: 11px;
+    color: $accent;
+    background-color: $accent-muted;
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    padding: 3px 8px;
+    border-radius: $radius-full;
+  }
+
+  .completion-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11.5px;
+    color: #6EE7B7;
+    background-color: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    padding: 3px 10px;
+    border-radius: $radius-full;
+
+    &__icon {
+      font-size: 12px;
+    }
+  }
+
+  .education-degree-title {
+    font-size: 22px;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    line-height: 1.25;
+
+    @include mobile {
+      font-size: 19px;
+    }
+  }
+
+  .education-school-name {
+    font-size: 14.5px;
+    color: #93C5FD;
+    margin-top: -6px;
+  }
+
+  &__details {
+    font-size: 14px;
+    line-height: 1.6;
+    color: $text-secondary;
+  }
+
+  &__footer {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 14px;
+    border-top: 1px solid $border-subtle;
+    font-size: 11px;
+    color: $text-tertiary;
+
+    .verified-icon {
+      color: $accent;
+      font-size: 13px;
+    }
+  }
+}
+
+.transparency-notice {
+  background-color: rgba(17, 17, 19, 0.5);
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11.5px;
+    color: $text-secondary;
+    font-weight: $font-weight-medium;
+  }
+
+  &__icon {
+    color: #F59E0B;
+    font-size: 13px;
+  }
+
+  &__text {
+    font-size: 11px;
+    color: $text-tertiary;
+    line-height: 1.55;
+  }
+}

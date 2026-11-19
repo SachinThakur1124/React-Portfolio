@@ -1,150 +1,373 @@
-import { useRef, useState } from "react";
-import "./contact.scss";
-import { motion, useInView } from "framer-motion";
+import React, { useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
+import { FiMail, FiMapPin, FiGithub, FiSend, FiCheckCircle, FiAlertCircle, FiClock } from 'react-icons/fi';
+import CTAButton from '../ui/CTAButton';
+import './contact.scss';
 
-// Animation variants for motion elements
-const variants = {
-    initial: {
-        y: 500,
-        opacity: 0
-    },
-    animate: {
-        y: 0,
-        opacity: 1,
-        transition: {
-            duration: 1,
-            staggerChildren: 0.1,
-        },
-    },
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.05
+    }
+  }
 };
 
-// Contact functional component
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.16, 1, 0.3, 1]
+    }
+  }
+};
+
 const Contact = () => {
-    // Refs for the form and animation
-    const formref = useRef();
-    const ref = useRef();
+  const formRef = useRef();
 
-    // Check if the component is in view
-    const isInview = useInView(ref, { margin: "-100px" });
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+    _honeypot: '' // Anti-spam honeypot
+  });
 
-    // State variables for error, success, and form data
-    const [error, setError] = useState(false);
-    const [success, setSuccess] = useState(false);
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        message: "",
-    });
+  const [errors, setErrors] = useState({});
+  const [status, setStatus] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'error'
+  const [errorMessage, setErrorMessage] = useState('');
+  const [lastSubmittedAt, setLastSubmittedAt] = useState(0);
 
-    // Handle input changes in the form
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-    };
+  // Validate form inputs
+  const validateForm = () => {
+    const newErrors = {};
 
-    // Send email using emailjs when the form is submitted
-    const sendEmail = (e) => {
-        e.preventDefault();
+    if (!formData.name.trim() || formData.name.trim().length < 2) {
+      newErrors.name = 'Please enter your name (minimum 2 characters).';
+    }
 
-        emailjs.sendForm('service_6qfnscl', 'template_wanwesw', formref.current, 'Id79MI24j61iC18t7')
-            .then((result) => {
-                setSuccess(true);
-                setFormData({
-                    name: "",
-                    email: "",
-                    message: "",
-                });
-            }, (error) => {
-                setError(true);
-            });
-    };
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim() || !emailRegex.test(formData.email.trim())) {
+      newErrors.email = 'Please provide a valid email address.';
+    }
 
-    // Render the Contact component
-    return (
-        <motion.div ref={ref} className="contact" variants={variants} initial="initial" whileInView="animate">
-            <motion.div className="textContainer" variants={variants}>
-                <motion.h1 variants={variants}>Let's Work Together</motion.h1>
-                <motion.div className="item" variants={variants}>
-                    <h2>Mail</h2>
-                    <span>Sachinthakur7814@gmail.com</span>
-                </motion.div>
-                <motion.div className="item" variants={variants}>
-                    <h2>Address</h2>
-                    <span>#418-D, Sector-124,Sunny Enclave </span>
-                </motion.div>
-                <motion.div className="item" variants={variants}>
-                    <h2>Phone </h2>
-                    <span>+91 78-147 52215</span>
-                </motion.div>
-            </motion.div>
-            <div className="formContainer">
-                {/* Animation for the phone svg */}
-                <motion.div
-                    className="phonesvg"
-                    initial={{ opacity: 1 }}
-                    whileInView={{ opacity: 0 }}
-                    transition={{ delay: 3, duration: 1 }}>
-                    <svg width="450px" height="450px" viewBox="0 0 32.666 32.666">
-                        {/* SVG path for the phone */}
-                        <motion.path strokeWidth={0.2} fill="none" initial={{ pathLength: 0 }} animate={isInview && { pathLength: 1 }} transition={{ duration: 3 }}  d="M28.189,16.504h-1.666c0-5.437-4.422-9.858-9.856-9.858l-0.001-1.664C23.021,4.979,28.189,10.149,28.189,16.504z
-            M16.666,7.856L16.665,9.52c3.853,0,6.983,3.133,6.981,6.983l1.666-0.001C25.312,11.735,21.436,7.856,16.666,7.856z M16.333,0
-            C7.326,0,0,7.326,0,16.334c0,9.006,7.326,16.332,16.333,16.332c0.557,0,1.007-0.45,1.007-1.006c0-0.559-0.45-1.01-1.007-1.01
-            c-7.896,0-14.318-6.424-14.318-14.316c0-7.896,6.422-14.319,14.318-14.319c7.896,0,14.317,6.424,14.317,14.319
-            c0,3.299-1.756,6.568-4.269,7.954c-0.913,0.502-1.903,0.751-2.959,0.761c0.634-0.377,1.183-0.887,1.591-1.529
-            c0.08-0.121,0.186-0.228,0.238-0.359c0.328-0.789,0.357-1.684,0.555-2.518c0.243-1.064-4.658-3.143-5.084-1.814
-            c-0.154,0.492-0.39,2.048-0.699,2.458c-0.275,0.366-0.953,0.192-1.377-0.168c-1.117-0.952-2.364-2.351-3.458-3.457l0.002-0.001
-            c-0.028-0.029-0.062-0.061-0.092-0.092c-0.031-0.029-0.062-0.062-0.093-0.092v0.002c-1.106-1.096-2.506-2.34-3.457-3.459
-            c-0.36-0.424-0.534-1.102-0.168-1.377c0.41-0.311,1.966-0.543,2.458-0.699c1.326-0.424-0.75-5.328-1.816-5.084
-            c-0.832,0.195-1.727,0.227-2.516,0.553c-0.134,0.057-0.238,0.16-0.359,0.24c-2.799,1.774-3.16,6.082-0.428,9.292
-            c1.041,1.228,2.127,2.416,3.245,3.576l-0.006,0.004c0.031,0.031,0.063,0.06,0.095,0.09c0.03,0.031,0.059,0.062,0.088,0.095
-            l0.006-0.006c1.16,1.118,2.535,2.765,4.769,4.255c4.703,3.141,8.312,2.264,10.438,1.098c3.67-2.021,5.312-6.338,5.312-9.719
-            C32.666,7.326,25.339,0,16.333,0z" /> </svg>
-                </motion.div>
-                {/* Form for user input */}
-                <motion.form
-                    ref={formref}
-                    onSubmit={sendEmail}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 4, duration: 1 }}>
-                    {/* Input fields for name, email, and message */}
-                    <input
-                        type="text"
-                        placeholder="Name..."
-                        required
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                    />
-                    <input
-                        type="email"
-                        placeholder="abc@mail.com..."
-                        required
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                    />
-                    <textarea
-                        rows={8}
-                        placeholder="Message..."
-                        name="message"
-                        value={formData.message}
-                        onChange={handleInputChange}
-                    />
-                    {/* Button to submit the form */}
-                    <button>Send</button>
-                    {/* Display error or success messages based on form submission */}
-                    {error && "Error"}
-                    {success && "Success"}
-                </motion.form>
-            </div>
+    if (!formData.subject.trim() || formData.subject.trim().length < 3) {
+      newErrors.subject = 'Please specify a subject (minimum 3 characters).';
+    }
+
+    if (!formData.message.trim() || formData.message.trim().length < 10) {
+      newErrors.message = 'Please write a message with at least 10 characters.';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+
+    // Clear field-specific error as user types
+    if (errors[name]) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: null
+      }));
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // 1. Anti-spam honeypot check
+    if (formData._honeypot) {
+      // Bot detected: fake immediate success without sending
+      setStatus('success');
+      return;
+    }
+
+    // 2. Client-side validation
+    if (!validateForm()) {
+      return;
+    }
+
+    // 3. Rate-limiting check (cooldown of 15 seconds)
+    const now = Date.now();
+    if (now - lastSubmittedAt < 15000) {
+      setStatus('error');
+      setErrorMessage('Please wait a few seconds before sending another message.');
+      return;
+    }
+
+    // 4. Read EmailJS credentials strictly from environment variables
+    const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+    const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
+    const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
+
+    if (!serviceId || !templateId || !publicKey) {
+      setStatus('error');
+      setErrorMessage('Email service configuration is not set. Please contact directly via email.');
+      return;
+    }
+
+    setStatus('submitting');
+    setErrorMessage('');
+
+    try {
+      await emailjs.sendForm(serviceId, templateId, formRef.current, publicKey);
+      setStatus('success');
+      setLastSubmittedAt(Date.now());
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+        _honeypot: ''
+      });
+      setErrors({});
+    } catch (err) {
+      setStatus('error');
+      setErrorMessage(
+        'Unable to transmit message at this moment. Please email sachinthakur7814@gmail.com directly.'
+      );
+    }
+  };
+
+  return (
+    <section className="contact-section" id="contact" aria-label="Contact Sachin Thakur">
+      <div className="contact-container">
+        {/* Section Header */}
+        <motion.div
+          className="contact-header"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div className="contact-header__tag font-mono">
+            <span>GET IN TOUCH</span>
+          </div>
+          <h2 className="contact-header__title">
+            Let's Build Something <span className="contact-header__highlight">Exceptional</span>.
+          </h2>
+          <p className="contact-header__description">
+            I am currently open to full-stack engineering opportunities, distributed architecture collaboration,
+            and ambitious software development. Reach out via the form below or through direct channels.
+          </p>
         </motion.div>
-    );
-}
 
-// Export the Contact component as the default export
+        {/* 2-Column Contact Layout */}
+        <div className="contact-layout">
+          {/* Left: Contact Info & Channels */}
+          <motion.div
+            className="contact-info"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+          >
+            {/* Info Cards */}
+            <motion.div className="info-card" variants={itemVariants}>
+              <div className="info-card__icon-wrap">
+                <FiMail />
+              </div>
+              <div className="info-card__content">
+                <span className="info-card__label font-mono">DIRECT EMAIL</span>
+                <a href="mailto:sachinthakur7814@gmail.com" className="info-card__value">
+                  sachinthakur7814@gmail.com
+                </a>
+              </div>
+            </motion.div>
+
+            <motion.div className="info-card" variants={itemVariants}>
+              <div className="info-card__icon-wrap">
+                <FiMapPin />
+              </div>
+              <div className="info-card__content">
+                <span className="info-card__label font-mono">LOCATION</span>
+                <span className="info-card__value">Mohali, India</span>
+              </div>
+            </motion.div>
+
+            <motion.div className="info-card" variants={itemVariants}>
+              <div className="info-card__icon-wrap">
+                <FiGithub />
+              </div>
+              <div className="info-card__content">
+                <span className="info-card__label font-mono">GITHUB REPOSITORIES</span>
+                <a
+                  href="https://github.com/SachinThakur1124"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="info-card__value"
+                >
+                  github.com/SachinThakur1124
+                </a>
+              </div>
+            </motion.div>
+
+            {/* Response Time Guarantee Pill */}
+            <motion.div className="response-time-pill" variants={itemVariants}>
+              <FiClock className="response-time-pill__icon" />
+              <span className="font-mono">Typical response time: Within 24 business hours</span>
+            </motion.div>
+          </motion.div>
+
+          {/* Right: Contact Form */}
+          <motion.div
+            className="contact-form-wrapper"
+            variants={itemVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+          >
+            <form ref={formRef} onSubmit={handleSubmit} className="contact-form" noValidate>
+              {/* Anti-spam honeypot (hidden from real users) */}
+              <div style={{ display: 'none' }} aria-hidden="true">
+                <label htmlFor="_honeypot">Leave blank</label>
+                <input
+                  type="text"
+                  id="_honeypot"
+                  name="_honeypot"
+                  value={formData._honeypot}
+                  onChange={handleInputChange}
+                  tabIndex="-1"
+                  autoComplete="off"
+                />
+              </div>
+
+              {/* Success Notification */}
+              {status === 'success' && (
+                <div className="form-alert form-alert--success">
+                  <FiCheckCircle className="form-alert__icon" />
+                  <div>
+                    <h4 className="form-alert__title font-mono">Message Sent Successfully!</h4>
+                    <p className="form-alert__text">
+                      Thank you for reaching out. Your message has been dispatched, and I will get back to you shortly.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Error Notification */}
+              {status === 'error' && (
+                <div className="form-alert form-alert--error">
+                  <FiAlertCircle className="form-alert__icon" />
+                  <div>
+                    <h4 className="form-alert__title font-mono">Message Delivery Issue</h4>
+                    <p className="form-alert__text">{errorMessage}</p>
+                  </div>
+                </div>
+              )}
+
+              {/* Name & Email Row */}
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="name" className="form-label font-mono">
+                    YOUR NAME <span className="required-star">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    placeholder="Jane Doe"
+                    disabled={status === 'submitting'}
+                    className={`form-input ${errors.name ? 'form-input--error' : ''}`}
+                    required
+                  />
+                  {errors.name && <span className="field-error font-mono">{errors.name}</span>}
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="email" className="form-label font-mono">
+                    EMAIL ADDRESS <span className="required-star">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="jane@company.com"
+                    disabled={status === 'submitting'}
+                    className={`form-input ${errors.email ? 'form-input--error' : ''}`}
+                    required
+                  />
+                  {errors.email && <span className="field-error font-mono">{errors.email}</span>}
+                </div>
+              </div>
+
+              {/* Subject Input */}
+              <div className="form-group">
+                <label htmlFor="subject" className="form-label font-mono">
+                  SUBJECT <span className="required-star">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleInputChange}
+                  placeholder="Software Engineering Inquiry / Project Scope"
+                  disabled={status === 'submitting'}
+                  className={`form-input ${errors.subject ? 'form-input--error' : ''}`}
+                  required
+                />
+                {errors.subject && <span className="field-error font-mono">{errors.subject}</span>}
+              </div>
+
+              {/* Message Textarea */}
+              <div className="form-group">
+                <label htmlFor="message" className="form-label font-mono">
+                  MESSAGE <span className="required-star">*</span>
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="6"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  placeholder="Share details regarding your project requirements, engineering role, or timeline..."
+                  disabled={status === 'submitting'}
+                  className={`form-textarea ${errors.message ? 'form-textarea--error' : ''}`}
+                  required
+                />
+                {errors.message && <span className="field-error font-mono">{errors.message}</span>}
+              </div>
+
+              {/* Submit Button */}
+              <div className="form-submit-row">
+                <CTAButton
+                  type="submit"
+                  variant="primary"
+                  size="lg"
+                  disabled={status === 'submitting'}
+                  icon={status === 'submitting' ? null : FiSend}
+                  iconPosition="right"
+                >
+                  {status === 'submitting' ? 'Transmitting Message...' : 'Send Message'}
+                </CTAButton>
+                <span className="privacy-hint font-mono">
+                  Privacy guaranteed · No spam or data sharing
+                </span>
+              </div>
+            </form>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 export default Contact;

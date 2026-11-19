@@ -1,41 +1,53 @@
+import React from "react";
 import "./app.scss";
-import About from "./components/aboutme/About";
-import Contact from "./components/contact/Contact";
-import Cursor from "./components/cursor/Cursor";
-import Hero from "./components/hero/Hero";
 import Navbar from "./components/navbar/Navbar";
-import Parallax from "./components/parallax/Parallax";
+import Hero from "./components/hero/Hero";
+import TechMarquee from "./components/marquee/TechMarquee";
+import About from "./components/aboutme/About";
 import Portfolio from "./components/portfolio/Portfolio";
-import Works from "./components/works/Works";
+import Skills from "./components/skills/Skills";
+import Experience from "./components/experience/Experience";
+import Education from "./components/education/Education";
+import Contact from "./components/contact/Contact";
+import Footer from "./components/footer/Footer";
 
 function App() {
   return (
     <div className="app">
-      {/* Cursor component */}
-      <Cursor />
-      {/* Home section with Navbar and Hero components */}
-      <section id="Home">
-        <Navbar />
+      {/* Navigation */}
+      <Navbar />
+
+      {/* Main Content Landmark */}
+      <main id="main-content">
+        {/* Hero Section */}
         <Hero />
-      </section>
-      {/* Works section with Parallax and Works components */}
-      <section id="Works">
-        <Parallax type="Works" />
-      </section>
-      <section>
-        <Works />
-      </section>
-      {/* Portfolio section with Parallax and Portfolio components */}
-      <section id="Portfolio">
-        <Parallax type="Portfolio" />
-      </section>
-      <Portfolio />
-      {/* AboutMe section with About component */}
-      <section id="AboutMe"><About /></section>
-      {/* Contact section with Contact component */}
-      <section id="contact">
+
+        {/* Technology Marquee */}
+        <TechMarquee />
+
+        {/* About Me / Bento Grid */}
+        <About />
+
+        {/* Featured Projects / Portfolio */}
+        <section id="Portfolio">
+          <Portfolio />
+        </section>
+
+        {/* Technical Skills */}
+        <Skills />
+
+        {/* Professional Experience */}
+        <Experience />
+
+        {/* Formal Education & Degrees */}
+        <Education />
+
+        {/* Contact */}
         <Contact />
-      </section>
+      </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

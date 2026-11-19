@@ -1,0 +1,108 @@
+@import '../../styles/tokens.scss';
+
+.mobile-menu {
+  position: fixed;
+  top: 72px;
+  left: 0;
+  right: 0;
+  background-color: $bg-secondary;
+  border-bottom: 1px solid $border-default;
+  padding: 24px;
+  z-index: 998;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+
+  @include desktop {
+    display: none;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 1px solid $border-subtle;
+    margin-bottom: 16px;
+  }
+
+  &__title {
+    font-size: 13px;
+    font-weight: $font-weight-medium;
+    color: $text-tertiary;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  &__close-btn {
+    color: $text-secondary;
+    font-size: 20px;
+    padding: 6px;
+    border-radius: $radius-sm;
+    transition: color $transition-fast, background-color $transition-fast;
+
+    &:hover {
+      color: $text-primary;
+      background-color: $bg-tertiary;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    font-size: 16px;
+    font-weight: $font-weight-medium;
+    color: $text-primary;
+    border-radius: $radius-md;
+    transition: background-color $transition-fast, color $transition-fast;
+
+    &:hover {
+      background-color: $bg-tertiary;
+      color: $accent;
+    }
+
+    &-arrow {
+      color: $text-tertiary;
+      font-size: 16px;
+      transition: transform $transition-fast;
+    }
+
+    &:hover &-arrow {
+      transform: translateX(4px);
+      color: $accent;
+    }
+  }
+
+  &__footer {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid $border-subtle;
+  }
+
+  &__github-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: $font-weight-medium;
+    background-color: $bg-tertiary;
+    color: $text-primary;
+    border: 1px solid $border-default;
+    border-radius: $radius-md;
+    transition: all $transition-fast;
+
+    &:hover {
+      border-color: rgba(59, 130, 246, 0.4);
+      color: $accent-hover;
+    }
+  }
+}

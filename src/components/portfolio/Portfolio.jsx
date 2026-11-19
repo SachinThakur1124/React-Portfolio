@@ -1,102 +1,155 @@
-import { useRef } from "react";
-import "./portfolio.scss";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-
-const items = [
-  {
-    id: 1,
-    title: "Hotel Booking Site",
-    img: "hh.png",
-    desc: "Implemented the frontend using React.js, utilizing components, hooks, and context for state management and UIinteractions.Implemented user authentication using JWT (JSON Web Tokens) for secure login and registration processes.",
-    seeDemo: "https://github.com/SachinThakur1124/HOTEL-HUB",
-    seeCode: "https://github.com/SachinThakur1124/HOTEL-HUB",
-  },
-  {
-    id: 2,
-    title: "Nike Landing Page",
-    img: "Nike.png",
-    desc: " This Nike landing page is a modern, responsive web page built with React and styled using Tailwind CSS. The design aims to provide an engaging user experience, showcasing the latest Nike products, promotions, and brand stories.",
-    seeDemo: "https://nike-front-page.netlify.app/",
-    seeCode: "https://github.com/SachinThakur1124/NIKE-Landing-Page",
-  },
-  {
-    id: 3,
-    title: "Modern AI ",
-    img: "AI.png",
-    desc: "The Brainwave AI landing page is a sleek, modern web page designed to introduce and promote Brainwave AI, an innovative AI-powered solution. Built with React for a dynamic interface and styled using Tailwind CSS, this landing page aims to captivate visitors with its clean design, intuitive navigation, and compelling content.",
-    seeDemo: "https://modern-ai-landing-page.netlify.app/",
-    seeCode: "https://github.com/SachinThakur1124/Modern-AI-Landing-Page",
-  },
-  {
-    id: 4,
-    title: "Weather App",
-    img: "Weather.png",
-    desc: "The Weather App is a modern, user-friendly application designed to provide accurate and up-to-date weather information for any location worldwide. Built with React for a dynamic interface, styled using Tailwind CSS for a sleek design, and powered by the OpenWeatherMap API, this app offers a seamless and interactive user experience.",
-    seeDemo: "https://react-vite-weather-app.netlify.app/",
-    seeCode: "https://github.com/SachinThakur1124/Weather-App",
-  },
-];
-
-const Single = ({ item }) => {
-  const ref = useRef();
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [-300, 300]);
-
-  const openUrl = (url) => {
-    if (url) {
-      window.open(url, "_blank");
-    }
-  };
-
-  return (
-    <section>
-      <div className="container">
-        <div className="wrapper">
-          <div className="imageContainer" ref={ref}>
-            <img src={item.img} alt="" />
-          </div>
-          <motion.div className="textContainer" style={{ y }}>
-            <h2>{item.title}</h2>
-            <p>{item.desc}</p>
-            {item.seeDemo && (
-              <button onClick={() => openUrl(item.seeDemo)}>See Demo</button>
-            )}
-            {item.seeCode && (
-              <button onClick={() => openUrl(item.seeCode)}>See Code</button>
-            )}
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-};
+import React from 'react';
+import { motion } from 'framer-motion';
+import { FiGithub, FiExternalLink, FiLock, FiCheckCircle } from 'react-icons/fi';
+import { projects } from '../../data/projects';
+import ProjectVisual from './ProjectVisual';
+import CTAButton from '../ui/CTAButton';
+import './portfolio.scss';
 
 const Portfolio = () => {
-  const ref = useRef();
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["end end", "start start"],
-  });
-
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-  });
-
   return (
-    <div className="portfolio" ref={ref}>
-      <div className="progress">
-        <h1>Featured Works</h1>
-        <motion.div style={{ scaleX }} className="progressBar"></motion.div>
+    <div className="portfolio-container">
+      {/* Section Header with smooth entrance */}
+      <motion.div
+        className="portfolio-header"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-40px' }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <div className="portfolio-header__tag font-mono">
+          <span>SELECTED WORK</span>
+        </div>
+        <h2 className="portfolio-header__title">
+          Featured Engineering <span className="portfolio-header__highlight">Projects &amp; Case Studies</span>.
+        </h2>
+        <p className="portfolio-header__description">
+          A collection of production-grade systems, enterprise platforms, and full-stack applications.
+          Company-owned proprietary projects are presented with architectural case studies.
+        </p>
+      </motion.div>
+
+      {/* Projects List — Standard document flow with individual scroll reveal */}
+      <div className="projects-list">
+        {projects.map((project, index) => {
+          const isReversed = index % 2 !== 0;
+
+          return (
+            <motion.article
+              key={project.id}
+              className={`project-card ${isReversed ? 'project-card--reversed' : ''}`}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+              aria-label={`Project: ${project.title}`}
+            >
+              {/* Content Column (Items 1 through 7) */}
+              <div className="project-card__content">
+                {/* Meta Header */}
+                <div className="project-card__meta">
+                  {project.isPrivate ? (
+                    <span className="project-badge project-badge--private font-mono">
+                      <FiLock className="project-badge__icon" />
+                      <span>{project.privateLabel || 'Private Company Project'}</span>
+                    </span>
+                  ) : (
+                    <span className="project-badge project-badge--public font-mono">
+                      <span>{project.category || 'Independent Project'}</span>
+                    </span>
+                  )}
+                  <span className="project-arch-tag font-mono">{project.architecture}</span>
+                </div>
+
+                {/* Title & Subtitle */}
+                <h3 className="project-card__title">{project.title}</h3>
+                <h4 className="project-card__subtitle font-mono">{project.subtitle}</h4>
+
+                {/* Problem & Overview */}
+                <p className="project-card__desc">{project.problemSolved}</p>
+
+                {/* Key Engineering Highlights / Contribution */}
+                <div className="project-card__features">
+                  <span className="features-label font-mono">Key Engineering Contribution:</span>
+                  <ul className="features-list">
+                    {project.features ? (
+                      project.features.map((feat, fIdx) => (
+                        <li key={fIdx} className="feature-item">
+                          <FiCheckCircle className="feature-item__icon" />
+                          <span>{feat}</span>
+                        </li>
+                      ))
+                    ) : (
+                      <li className="feature-item">
+                        <FiCheckCircle className="feature-item__icon" />
+                        <span>{project.myContribution}</span>
+                      </li>
+                    )}
+                  </ul>
+                </div>
+
+                {/* Tech Stack Pills */}
+                <div className="project-card__tech">
+                  {project.techStack.map((tech) => (
+                    <span key={tech} className="tech-tag font-mono">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Action Links */}
+                <div className="project-card__actions">
+                  {project.liveUrl && (
+                    <CTAButton
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      variant="primary"
+                      size="sm"
+                      icon={FiExternalLink}
+                      iconPosition="right"
+                    >
+                      Live Demo
+                    </CTAButton>
+                  )}
+
+                  {project.githubUrl && (
+                    <CTAButton
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      variant="secondary"
+                      size="sm"
+                      icon={FiGithub}
+                      iconPosition="left"
+                    >
+                      Source Code
+                    </CTAButton>
+                  )}
+
+                  {project.isPrivate && (
+                    <div className="private-confidential-notice font-mono">
+                      <FiLock className="notice-icon" />
+                      <span>{project.privateLabel} &middot; Proprietary Architecture</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Visual Preview Column (Item 8) with subtle smooth reveal */}
+              <motion.div
+                className="project-card__visual"
+                initial={{ opacity: 0, scale: 0.98 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <ProjectVisual project={project} />
+              </motion.div>
+            </motion.article>
+          );
+        })}
       </div>
-      {items.map((item) => (
-        <Single item={item} key={item.id} />
-      ))}
     </div>
   );
 };
