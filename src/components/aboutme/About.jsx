@@ -100,7 +100,7 @@ const About = () => {
           <motion.div className="bento-card bento-card--portrait" variants={cardVariants}>
             <div className="portrait-wrapper">
               <img
-                src="/sachin.png"
+                src="/sachin.jpeg"
                 alt="Sachin Thakur - Full-Stack Software Engineer"
                 className="portrait-image"
                 loading="lazy"

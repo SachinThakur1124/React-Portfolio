@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
-import { FiMail, FiMapPin, FiGithub, FiSend, FiCheckCircle, FiAlertCircle, FiClock } from 'react-icons/fi';
+import { FiMail, FiMapPin, FiGithub, FiSend, FiCheckCircle, FiAlertCircle, FiClock, FiDownload, FiLinkedin } from 'react-icons/fi';
+import { contactDetails } from '../../data/experience';
 import CTAButton from '../ui/CTAButton';
 import './contact.scss';
 
@@ -214,6 +215,41 @@ const Contact = () => {
                 </a>
               </div>
             </motion.div>
+
+            <motion.div className="info-card" variants={itemVariants}>
+              <div className="info-card__icon-wrap">
+                <FiDownload />
+              </div>
+              <div className="info-card__content">
+                <span className="info-card__label font-mono">CURRICULUM VITAE</span>
+                <a
+                  href="/assets/Sachin-Thakur-Resume.pdf"
+                  download="Sachin-Thakur-Resume.pdf"
+                  className="info-card__value"
+                >
+                  Download Resume (PDF)
+                </a>
+              </div>
+            </motion.div>
+
+            {contactDetails.linkedin && (
+              <motion.div className="info-card" variants={itemVariants}>
+                <div className="info-card__icon-wrap">
+                  <FiLinkedin />
+                </div>
+                <div className="info-card__content">
+                  <span className="info-card__label font-mono">LINKEDIN PROFILE</span>
+                  <a
+                    href={contactDetails.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="info-card__value"
+                  >
+                    {contactDetails.linkedin.replace(/^https?:\/\//, '')}
+                  </a>
+                </div>
+              </motion.div>
+            )}
 
             {/* Response Time Guarantee Pill */}
             <motion.div className="response-time-pill" variants={itemVariants}>

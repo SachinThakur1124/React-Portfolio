@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiX, FiGithub, FiArrowUpRight } from 'react-icons/fi';
+import { FiX, FiArrowUpRight } from 'react-icons/fi';
+import { FaFilePdf, FaGithub, FaLinkedin } from 'react-icons/fa';
+import { contactDetails } from '../../data/experience';
 import './MobileMenu.scss';
 
 const menuVariants = {
@@ -42,12 +44,12 @@ const MobileMenu = ({ isOpen, onClose, navLinks }) => {
         >
           <div className="mobile-menu__header">
             <span className="mobile-menu__title">
-              Menu
+              Navigation
             </span>
             <button
               className="mobile-menu__close-btn"
               onClick={onClose}
-              aria-label="Close menu"
+              aria-label="Close navigation menu"
             >
               <FiX />
             </button>
@@ -69,17 +71,59 @@ const MobileMenu = ({ isOpen, onClose, navLinks }) => {
           </nav>
 
           <div className="mobile-menu__footer">
+            {/* 1. Get in Touch Primary Action */}
             <a
-              href="https://github.com/SachinThakur1124"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mobile-menu__github-btn"
+              href="#contact"
+              className="mobile-menu__action-btn mobile-menu__action-btn--primary"
               onClick={onClose}
+              aria-label="Get in Touch"
             >
-              <FiGithub />
-              <span>GitHub Profile</span>
-              <FiArrowUpRight />
+              <span>Get in Touch</span>
+              <FiArrowUpRight className="mobile-action-icon" />
             </a>
+
+            {/* 2. Resume Download Action */}
+            <a
+              href="/assets/Sachin-Thakur-Resume.pdf"
+              download="Sachin-Thakur-Resume.pdf"
+              className="mobile-menu__action-btn mobile-menu__action-btn--secondary"
+              onClick={onClose}
+              aria-label="Download Resume (PDF)"
+            >
+              <FaFilePdf className="mobile-action-icon" />
+              <span>Download Resume (PDF)</span>
+            </a>
+
+            {/* 3. Compact Icon + Text Social Links */}
+            <div className="mobile-menu__socials">
+              <a
+                href="https://github.com/SachinThakur1124"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mobile-menu__social-link"
+                onClick={onClose}
+                aria-label="GitHub Profile"
+              >
+                <FaGithub className="mobile-social-icon" />
+                <span>GitHub</span>
+                <FiArrowUpRight className="mobile-social-arrow" />
+              </a>
+
+              {contactDetails.linkedin && (
+                <a
+                  href={contactDetails.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mobile-menu__social-link"
+                  onClick={onClose}
+                  aria-label="LinkedIn Profile"
+                >
+                  <FaLinkedin className="mobile-social-icon" />
+                  <span>LinkedIn</span>
+                  <FiArrowUpRight className="mobile-social-arrow" />
+                </a>
+              )}
+            </div>
           </div>
         </motion.div>
       )}

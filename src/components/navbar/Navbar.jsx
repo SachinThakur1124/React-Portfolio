@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FiGithub, FiMenu, FiX } from 'react-icons/fi';
+import { FaFilePdf, FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FiMenu, FiX, FiArrowUpRight } from 'react-icons/fi';
+import { contactDetails } from '../../data/experience';
 import MobileMenu from './MobileMenu';
-import CTAButton from '../ui/CTAButton';
 import './navbar.scss';
 
 const NAV_LINKS = [
-  { name: 'Projects', href: '#Portfolio' },
+  { name: 'Home', href: '#Home' },
   { name: 'About', href: '#AboutMe' },
   { name: 'Skills', href: '#Skills' },
   { name: 'Experience', href: '#Experience' },
-  { name: 'Education', href: '#Education' },
+  { name: 'Projects', href: '#Portfolio' },
   { name: 'Contact', href: '#contact' },
 ];
 
@@ -58,29 +59,55 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Right CTA / GitHub Profile */}
+        {/* Right Action Icons + Get in Touch CTA (Desktop) & Mobile Hamburger */}
         <div className="navbar-actions">
-          <CTAButton
-            href="https://github.com/SachinThakur1124"
-            target="_blank"
-            rel="noopener noreferrer"
-            variant="ghost"
-            size="sm"
-            icon={FiGithub}
-            iconPosition="left"
-            className="navbar-actions__github"
-          >
-            GitHub
-          </CTAButton>
+          <div className="navbar-icon-group" role="group" aria-label="Social and Resume Links">
+            {/* 1. Resume Action */}
+            <a
+              href="/assets/Sachin-Thakur-Resume.pdf"
+              download="Sachin-Thakur-Resume.pdf"
+              className="nav-icon-btn"
+              aria-label="Download Resume (PDF)"
+              title="Download Resume (PDF)"
+            >
+              <FaFilePdf className="nav-icon-btn__icon" />
+              <span className="nav-icon-tooltip font-mono">Resume (PDF)</span>
+            </a>
 
-          <CTAButton
-            href="#contact"
-            variant="primary"
-            size="sm"
-            className="navbar-actions__contact"
-          >
-            Get in Touch
-          </CTAButton>
+            {/* 2. GitHub Action */}
+            <a
+              href="https://github.com/SachinThakur1124"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nav-icon-btn"
+              aria-label="GitHub Profile"
+              title="GitHub: SachinThakur1124"
+            >
+              <FaGithub className="nav-icon-btn__icon" />
+              <span className="nav-icon-tooltip font-mono">GitHub</span>
+            </a>
+
+            {/* 3. LinkedIn Action */}
+            {contactDetails.linkedin && (
+              <a
+                href={contactDetails.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="nav-icon-btn"
+                aria-label="LinkedIn Profile"
+                title="LinkedIn: Sachin Thakur"
+              >
+                <FaLinkedin className="nav-icon-btn__icon" />
+                <span className="nav-icon-tooltip font-mono">LinkedIn</span>
+              </a>
+            )}
+          </div>
+
+          {/* 4. Desktop "Get in Touch" Primary CTA */}
+          <a href="#contact" className="navbar-cta-btn">
+            <span>Get in Touch</span>
+            <FiArrowUpRight className="navbar-cta-btn__icon" />
+          </a>
 
           {/* Mobile Menu Trigger */}
           <button

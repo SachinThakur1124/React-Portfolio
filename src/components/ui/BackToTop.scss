@@ -1,0 +1,58 @@
+@import '../../styles/tokens.scss';
+
+.back-to-top-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: $font-weight-medium;
+  color: $text-secondary;
+  background-color: rgba(17, 17, 19, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 8px 16px;
+  border-radius: $radius-full;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 12px rgba(59, 130, 246, 0.12);
+  cursor: pointer;
+  user-select: none;
+  transition: color $transition-fast, background-color $transition-fast, border-color $transition-fast, box-shadow $transition-fast;
+
+  &__icon {
+    font-size: 14px;
+    color: $accent;
+    transition: transform $transition-fast;
+  }
+
+  &:hover {
+    color: #FFFFFF;
+    background-color: rgba(26, 26, 30, 0.95);
+    border-color: rgba(59, 130, 246, 0.45);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.65), 0 0 18px rgba(59, 130, 246, 0.3);
+
+    .back-to-top-float__icon {
+      transform: translateY(-2px);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid $accent;
+    outline-offset: 3px;
+  }
+
+  @include mobile {
+    bottom: 20px;
+    right: 20px;
+    padding: 7px 13px;
+    font-size: 12px;
+    gap: 6px;
+
+    &__icon {
+      font-size: 13px;
+    }
+  }
+}

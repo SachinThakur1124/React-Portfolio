@@ -660,6 +660,64 @@
 }
 
 // -----------------------------------------------------------------------------
+// 7. Aura AI Preview
+// -----------------------------------------------------------------------------
+.aura-preview {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  @include mobile {
+    padding: 14px;
+    gap: 10px;
+  }
+}
+
+.aura-chat-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: #10B981;
+
+  .aura-status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #10B981;
+    box-shadow: 0 0 6px #10B981;
+  }
+}
+
+.aura-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .aura-msg {
+    padding: 10px 12px;
+    border-radius: $radius-sm;
+    font-size: 11.5px;
+    line-height: 1.45;
+
+    &--user {
+      background-color: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      color: $text-primary;
+      align-self: flex-start;
+    }
+
+    &--ai {
+      background-color: $bg-secondary;
+      border: 1px solid $border-subtle;
+      color: $text-secondary;
+      align-self: flex-start;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
 // Shared Transparent Preview Caption
 // -----------------------------------------------------------------------------
 .preview-caption {

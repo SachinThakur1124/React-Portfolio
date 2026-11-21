@@ -26,11 +26,11 @@
 // Section Header
 // -----------------------------------------------------------------------------
 .skills-header {
-  margin-bottom: 56px;
+  margin-bottom: 36px;
   max-width: 720px;
 
   @include mobile {
-    margin-bottom: 36px;
+    margin-bottom: 24px;
   }
 
   &__tag {

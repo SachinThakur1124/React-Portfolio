@@ -1,6 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FiArrowDown, FiArrowRight, FiGithub, FiCheckCircle } from 'react-icons/fi';
+import {
+  FiArrowRight,
+  FiGithub,
+  FiCheckCircle,
+  FiDownload
+} from 'react-icons/fi';
 import CTAButton from '../ui/CTAButton';
 import './hero.scss';
 
@@ -115,11 +120,14 @@ const Hero = () => {
               </CTAButton>
 
               <CTAButton
-                href="#contact"
+                href="/assets/Sachin-Thakur-Resume.pdf"
+                download="Sachin-Thakur-Resume.pdf"
                 variant="secondary"
                 size="lg"
+                icon={FiDownload}
+                iconPosition="left"
               >
-                Get in Touch
+                Download Resume
               </CTAButton>
 
               <CTAButton
@@ -148,32 +156,13 @@ const Hero = () => {
             >
               <img
                 src="/assets/developer-workspace.svg"
-                alt="Developer workstation coding interface illustration"
-                className="hero-visual__image"
-                width="680"
-                height="540"
+                alt="Developer workstation coding interface"
+                className="hero-illustration"
+                loading="eager"
               />
             </motion.div>
           </motion.div>
         </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.a
-          href="#Portfolio"
-          className="hero-scroll"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.5 }}
-          aria-label="Scroll down to projects"
-        >
-          <span className="hero-scroll__text">EXPLORE</span>
-          <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-          >
-            <FiArrowDown className="hero-scroll__icon" />
-          </motion.div>
-        </motion.a>
       </div>
     </section>
   );

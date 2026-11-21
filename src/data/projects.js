@@ -1,40 +1,42 @@
 /**
  * Portfolio Projects Data
  * 
- * Synchronized directly with verified resume project records:
+ * Two distinct, coexisting categories across 11 total verified projects:
+ * 
+ * Category A: Professional Projects (All 6 Resume Projects)
  * 1. OptiNetFlow (B2B Payment Interchange-Optimization Engine)
- * 2. DLC (React + Headless WordPress + Algolia Search)
- * 3. IT Riders (Python Automated Resume-Parsing Pipeline)
- * 4. Crikk (SvelteKit + Azure Speech AI Suite)
- * 5. Sukhi Wellness (React Native Health & Gamified Engagement App)
+ * 2. DLC (High-Performance E-Commerce & Content Search System)
+ * 3. IT Riders (Automated Resume Parsing & Talent Intelligence Pipeline)
+ * 4. Crikk (AI Voice Generation & Speech Processing Platform)
+ * 5. Sukhi Wellness (Mobile Health & Gamified Engagement Application)
  * 6. School Management System (Educational Administration & Billing ERP)
  * 
- * Rules:
- * - Zero fabricated GitHub repositories, live demo URLs, screenshots, or metrics.
- * - Proprietary client/company projects carry clear professional badges.
+ * Category B: Personal Projects (All 5 Recovered Personal Projects)
+ * 1. Hotel Hub (Full-Stack MERN Hotel Booking Application)
+ * 2. Modern AI Landing Page (Brainwave AI High-Fidelity Showcase)
+ * 3. Nike Landing Page (Brand-Forward E-Commerce Experience)
+ * 4. Weather App (OpenWeatherMap Meteorological Forecast Utility)
+ * 5. Aura AI (Next.js Conversational AI Application)
  */
 
-export const projects = [
+export const professionalProjects = [
   {
     id: 'optinetflow',
     title: 'OptiNetFlow',
     subtitle: 'B2B Payment Interchange-Optimization Engine',
-    category: 'Enterprise FinTech Platform',
+    projectType: 'professional',
+    category: 'Enterprise FinTech',
+    visibility: 'Private',
     isPrivate: true,
     privateLabel: 'Private Company Project',
     tagline: 'High-throughput interchange-optimization engine built for enterprise B2B payment transactions.',
-    overview:
-      'Engineered an interchange-optimization engine to minimize merchant processing overhead, enrich payment transactions with card-level metadata, and automate multi-party fee splits.',
-    problemSolved:
-      'Enterprise B2B platforms process high-volume card payments that incur unnecessary interchange fees and settlement delays without Level 2/3 data optimization and automated dispute auditing.',
-    myContribution:
-      'Architected event-driven ingestion pipelines, Level 2/3 data enrichment services, append-only PostgreSQL financial ledgers, and secure webhook verification workers.',
+    description:
+      'Engineered an interchange-optimization engine attaching Level 2/3 card data to payment intents, routing charges through Stripe Connect Direct Charges, and settling multi-party fees via append-only ledgers.',
     features: [
       'Level 2/3 card data enrichment and Stripe Connect Direct Charges integration',
-      'Event-driven Shopify and Stripe webhook pipeline orchestrated via AWS SQS FIFO queues',
+      'Event-driven webhook pipeline orchestrated via AWS SQS FIFO queues',
       'Append-only PostgreSQL ledger architecture guaranteeing idempotent financial record processing',
-      'Multi-party programmatic fee splitting and automated monthly merchant settlement pipelines',
-      'AES-256-GCM field encryption and HMAC SHA-256 webhook signature verification'
+      'AES-256-GCM field encryption and constant-time HMAC webhook verification'
     ],
     techStack: [
       'TypeScript',
@@ -55,63 +57,53 @@ export const projects = [
     id: 'dlc',
     title: 'DLC',
     subtitle: 'High-Performance E-Commerce & Content Search System',
-    category: 'Commercial Web Application',
+    projectType: 'professional',
+    category: 'E-Commerce',
+    visibility: 'Commercial Client',
     isPrivate: true,
     privateLabel: 'Commercial Client Project',
-    tagline: 'Fast, faceted search and discovery engine for catalog of 5,000+ items across headless architecture.',
-    overview:
-      'Integrated an ultra-fast, faceted search and discovery experience for an extensive catalog of 5,000+ items across a headless CMS architecture.',
-    problemSolved:
-      'Extensive e-commerce and media content catalogs suffered from slow keyword querying, high search bounce rates, and poor discoverability across complex product hierarchies.',
-    myContribution:
-      'Connected Algolia instant search indices with a custom React client, optimized query debounce pipelines, and established faceted filtering for sub-300ms discovery.',
+    tagline: 'Sub-300ms typo-tolerant search and multi-attribute product catalog indexing.',
+    description:
+      'Built a high-performance search experience integrating Algolia with a React frontend on a headless WordPress backend, delivering near-instant, typo-tolerant catalog discovery across 5k+ items.',
     features: [
-      'Integrated Algolia instant search engine with React frontend and Headless WordPress REST backend',
-      'Built typo-tolerant real-time indexing pipeline with response latencies under 300 ms',
-      'Implemented multi-attribute faceted filtering, sorting, and category hierarchies across 5,000+ items',
-      'Optimized client-side cache and query debouncing to minimize redundant API payload transmissions'
+      'Sub-300ms instant, typo-tolerant search powered by Algolia search engine integration',
+      'Dynamic multi-attribute faceted filtering across 5k+ indexed catalog products',
+      'Headless WordPress REST API integration with customized JSON payloads',
+      'Modular React component architecture optimizing client-side catalog navigation'
     ],
     techStack: [
       'React.js',
       'Headless WordPress',
       'Algolia Search',
-      'JavaScript',
       'REST APIs',
+      'JavaScript',
       'CSS3'
     ],
-    architecture: 'Decoupled React Client + Headless WordPress CMS',
+    architecture: 'Headless WordPress & Algolia Search Engine',
     githubUrl: null,
     liveUrl: null,
     image: null,
-    visualType: 'dlc-search'
+    visualType: 'dlc'
   },
   {
     id: 'it-riders',
     title: 'IT Riders',
     subtitle: 'Automated Resume Parsing & Talent Intelligence Pipeline',
-    category: 'Enterprise HRTech System',
+    projectType: 'professional',
+    category: 'AI Pipeline',
+    visibility: 'Enterprise Client',
     isPrivate: true,
     privateLabel: 'Enterprise Client Project',
-    tagline: 'Automated document parsing and entity-extraction pipeline for technical recruitment.',
-    overview:
-      'Designed an automated candidate ingestion and resume intelligence pipeline that parses technical CVs, extracts verified competencies, and scores experience depth.',
-    problemSolved:
-      'Technical recruitment teams spent hundreds of manual hours reviewing unstructured resumes across varying formats, creating hiring bottlenecks and inconsistent candidate assessments.',
-    myContribution:
-      'Engineered Python document parsing workers, entity recognition models for skills and job tenures, and clean REST APIs for applicant tracking integrations.',
+    tagline: 'Automated talent extraction pipeline eliminating manual resume data entry.',
+    description:
+      'Developed a Python resume-parsing pipeline that automatically extracts candidate skills, proficiency levels, and work experience from unstructured resumes, cutting recruiter review time by ~40%.',
     features: [
-      'Designed and deployed an end-to-end resume extraction and parsing pipeline in Python',
-      'Extracted structured candidate skill sets, experience hierarchies, and proficiency tiers from unstructured resumes',
-      'Achieved approximately 40% reduction in recruiter candidate review and screening cycle time',
-      'Exposed clean REST API endpoints for seamless ATS platform integration and automated candidate profiling'
+      'Automated candidate skill set and experience hierarchy extraction in Python',
+      '~40% reduction in recruiter candidate review and screening cycle time',
+      'Robust unstructured PDF and DOCX document normalization pipeline',
+      'REST API endpoints for ATS platform integration and automated candidate profiling'
     ],
-    techStack: [
-      'Python',
-      'REST APIs',
-      'NLP Parsing',
-      'FastAPI',
-      'JSON Schema'
-    ],
+    techStack: ['Python', 'REST APIs', 'NLP Parsing', 'FastAPI', 'JSON Schema'],
     architecture: 'Python Document Ingestion & Extraction Microservice',
     githubUrl: null,
     liveUrl: null,
@@ -122,21 +114,19 @@ export const projects = [
     id: 'crikk',
     title: 'Crikk',
     subtitle: 'AI Voice Generation & Speech Processing Platform',
-    category: 'AI Speech Platform',
+    projectType: 'professional',
+    category: 'Speech Platform',
+    visibility: 'Commercial Client',
     isPrivate: true,
-    privateLabel: 'Production Web Application',
-    tagline: 'AI-powered voice generation suite delivering natural-sounding text-to-speech and precision speech-to-text.',
-    overview:
-      'Production AI speech synthesis application supporting realistic multi-language text-to-speech streaming, automated speech-to-text transcriptions, and audio workspace tools.',
-    problemSolved:
-      'Content creators and accessibility users required ultra-low-latency, multi-language speech generation without audio clipping or browser-side playback degradation.',
-    myContribution:
-      'Integrated Azure Cognitive Services Speech SDK with Python audio rendering microservices and migrated frontend architecture to SvelteKit with zero regression.',
+    privateLabel: 'Commercial Client Project',
+    tagline: 'Real-time text-to-speech voice pipeline utilizing Azure Cognitive Services.',
+    description:
+      'Built AI-voice features integrating Azure Cognitive Services (Speech SDK) with a Python voice pipeline for real-time text-to-speech, and led production migration to SvelteKit with zero regression.',
     features: [
-      'Integrated Azure Speech SDK and specialized Python audio processing workers for low-latency voice synthesis',
-      'Implemented real-time text-to-speech (TTS) streaming and accurate multi-language speech-to-text (STT)',
-      'Migrated production application to SvelteKit with 100% functional parity and zero regression in core workflows',
-      'Engineered responsive audio waveform visualization and browser-native player playback controls'
+      'Real-time text-to-speech and speech-to-text generation via Azure Cognitive Services',
+      'Python voice processing pipeline delivering natural AI voice synthesis from text prompts',
+      'Full application framework migration to SvelteKit with complete functional parity',
+      'Responsive audio player interface with dynamic waveform synchronization'
     ],
     techStack: [
       'SvelteKit',
@@ -149,27 +139,25 @@ export const projects = [
     githubUrl: null,
     liveUrl: null,
     image: null,
-    visualType: 'crikk-voice'
+    visualType: 'crikk'
   },
   {
     id: 'sukhi-wellness',
     title: 'Sukhi Wellness',
     subtitle: 'Mobile Health & Gamified Engagement Application',
-    category: 'Cross-Platform Mobile App',
+    projectType: 'professional',
+    category: 'Mobile Health',
+    visibility: 'Commercial Client',
     isPrivate: true,
-    privateLabel: 'Mobile Application',
-    tagline: 'Cross-platform mobile application modules encouraging mental wellness through habit gamification.',
-    overview:
-      'Cross-platform mental health and wellness mobile application designed to promote daily reflective routines, guided exercises, and milestone achievements.',
-    problemSolved:
-      'Mental health and wellness platforms face steep drop-offs without engaging milestone rewards, habit streaks, and reliable cross-session video progress persistence.',
-    myContribution:
-      'Built reusable badge progression components, streak tracking storage, and real-time video watch telemetry in React Native for iOS and Android.',
+    privateLabel: 'Commercial Client Project',
+    tagline: 'Cross-platform mobile wellness app with gamified progression and telemetry.',
+    description:
+      'Designed a reusable Badge component system and gamified achievement flow with multi-level progression tied to real-time video-watch tracking, integrating React Native with REST APIs.',
     features: [
-      'Developed modular, reusable Badge components and celebration milestone micro-interactions',
-      'Implemented a gamified achievement progression engine with persistent user streak tracking',
-      'Integrated real-time video-watch progress telemetry and cross-session state synchronization',
-      'Maintained 60 FPS UI fluid performance across both iOS and Android release builds'
+      'Modular, reusable Badge component system and milestone celebration animations',
+      'Gamified achievement progression engine with persistent user streak tracking',
+      'Real-time video-watch progress telemetry and cross-session state synchronization',
+      'Fluid 60 FPS mobile UI interactions across iOS and Android release builds'
     ],
     techStack: [
       'React Native',
@@ -188,35 +176,160 @@ export const projects = [
   {
     id: 'school-management-system',
     title: 'School Management System',
-    subtitle: 'Comprehensive Educational Administration & Billing ERP',
-    category: 'Enterprise ERP Platform',
+    subtitle: 'Educational Administration & Billing ERP',
+    projectType: 'professional',
+    category: 'Institutional ERP',
+    visibility: 'Private',
     isPrivate: true,
     privateLabel: 'Private Company Project',
     tagline: 'Comprehensive educational administration and institutional ERP platform.',
-    overview:
-      'A production-oriented educational management system designed to streamline institutional administration, multi-step student admissions, fee tracking, and departmental operations.',
-    problemSolved:
-      'Replaced manual paperwork and disparate spreadsheets with a unified system managing courses, fee schedules, installment tracking, and role-based staff access.',
-    myContribution:
-      'Developed core backend controllers and routes in Express, designed MongoDB schema models for student admissions, course fees, installment calculations, and receipts, and built modular admin interfaces in React with TypeScript.',
+    description:
+      'Production-oriented educational management system designed to streamline institutional administration, dynamic custom-field student admissions, fee tracking, and departmental operations.',
     features: [
-      'Built dynamic, schema-driven custom-field form engines for flexible student enrollment records',
-      'Engineered calendar-based automated reminder scheduling and alert dispatches for pending dues',
-      'Developed structured monthly student data collection organized systematically by billing and fee cycles',
-      'Implemented secure role-based access control (RBAC) across administrative, faculty, and accounting personnel'
+      'Dynamic custom-field admissions and departmental course configuration',
+      'Automated student billing schedule generator with installment calendar tracking',
+      'Role-based access control (RBAC) separating administrative, registrar, and billing privileges',
+      'Calendar-based payment notification and overdue ledger reconciliation workflows'
     ],
     techStack: [
       'React.js',
       'TypeScript',
-      'Node.js',
       'Express.js',
+      'Node.js',
       'MongoDB',
+      'REST APIs',
       'RBAC'
     ],
-    architecture: 'MERN ERP Architecture',
+    architecture: 'MERN Stack & Role-Based Access Control',
     githubUrl: null,
     liveUrl: null,
     image: null,
     visualType: 'school-erp'
   }
 ];
+
+export const personalProjects = [
+  {
+    id: 'hotel-hub',
+    title: 'Hotel Hub',
+    subtitle: 'MERN-Based Hotel Booking Application',
+    projectType: 'personal',
+    category: 'Full-Stack MERN',
+    visibility: 'Open Source',
+    isPrivate: false,
+    tagline: 'End-to-end hotel booking platform with room browsing, reservation workflows, and JWT authentication.',
+    description:
+      'Full-stack hotel reservation application utilizing React.js, Context API for state management, Node.js/Express REST APIs, and MongoDB for room inventory and user booking records.',
+    features: [
+      'Interactive room discovery with multi-parameter filter criteria',
+      'Secure user authentication and registration workflows engineered with JWT',
+      'Context API state store managing active reservations across navigation cycles',
+      'Responsive interface styled with Tailwind CSS for multi-device parity'
+    ],
+    techStack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Tailwind CSS'],
+    image: '/hh.png',
+    visualType: null,
+    githubUrl: 'https://github.com/SachinThakur1124/HOTEL-HUB',
+    liveUrl: 'https://hotel-hub-xi.vercel.app'
+  },
+  {
+    id: 'modern-ai',
+    title: 'Modern AI Landing Page',
+    subtitle: 'Brainwave AI Product Experience',
+    projectType: 'personal',
+    category: 'AI Platform',
+    visibility: 'Open Source',
+    isPrivate: false,
+    tagline: 'Sleek, futuristic product landing page introducing Brainwave AI with Bento grids and fluid interactions.',
+    description:
+      'Responsive AI product landing page featuring clean visual hierarchy, Bento-grid feature cards, interactive UI controls, and tailored animations built with React and Tailwind CSS.',
+    features: [
+      'Futuristic UI aesthetic with glowing ambient backdrops and gradients',
+      'Bento-grid feature highlights with tailored responsive layout adaptations',
+      'Interactive hero and navigation elements built with fluid micro-transitions',
+      'High-performance production bundle optimized via Vite tooling'
+    ],
+    techStack: ['React.js', 'Tailwind CSS', 'Vite', 'Framer Motion', 'Responsive UI'],
+    image: '/AI.png',
+    visualType: null,
+    githubUrl: 'https://github.com/SachinThakur1124/Modern-AI-Landing-Page',
+    liveUrl: 'https://modern-ai-landing-page.netlify.app/'
+  },
+  {
+    id: 'nike-landing-page',
+    title: 'Nike Landing Page',
+    subtitle: 'Brand-Forward E-Commerce Showcase',
+    projectType: 'personal',
+    category: 'E-Commerce',
+    visibility: 'Open Source',
+    isPrivate: false,
+    tagline: 'Editorial footwear product showcase with responsive hero sections, product grids, and promotional highlights.',
+    description:
+      'Modern, mobile-responsive e-commerce landing page showcasing athletic footwear collections, promotional banners, and product feature carousels with polished responsive typography and Tailwind CSS.',
+    features: [
+      'High-impact visual hero section highlighting flagship footwear models',
+      'Dynamic product thumbnail switcher previewing colorway variants',
+      'Promotional editorial banners with responsive multi-column layouts',
+      'Accessible, touch-friendly mobile design maintaining brand consistency'
+    ],
+    techStack: ['React.js', 'Tailwind CSS', 'JavaScript', 'Responsive Design'],
+    image: '/Nike.png',
+    visualType: null,
+    githubUrl: 'https://github.com/SachinThakur1124/NIKE-Landing-Page',
+    liveUrl: 'https://nike-front-page.netlify.app/'
+  },
+  {
+    id: 'weather-app',
+    title: 'Weather App',
+    subtitle: 'Live Global Meteorological Forecasting',
+    projectType: 'personal',
+    category: 'Weather Utility',
+    visibility: 'Open Source',
+    isPrivate: false,
+    tagline: 'Real-time global weather forecasting powered by the OpenWeatherMap REST API.',
+    description:
+      'Fast, interactive weather utility delivering live temperature readings, dynamic atmospheric icons, humidity metrics, and instantaneous city lookup using React, Vite, and OpenWeatherMap APIs.',
+    features: [
+      'Real-time weather data fetching via OpenWeatherMap REST API integration',
+      'Instantaneous global city search with error-handling for unlisted queries',
+      'Dynamic weather condition badges and atmospheric metric cards',
+      'Lightweight, responsive interface optimized for ultra-fast mobile loading'
+    ],
+    techStack: ['React.js', 'Vite', 'Tailwind CSS', 'OpenWeather API', 'REST APIs'],
+    image: '/Weather.png',
+    visualType: null,
+    githubUrl: 'https://github.com/SachinThakur1124/Weather-App',
+    liveUrl: 'https://react-vite-weather-app.netlify.app/'
+  },
+  {
+    id: 'aura-ai',
+    title: 'Aura AI',
+    subtitle: 'Next.js Conversational AI Application',
+    projectType: 'personal',
+    category: 'Conversational AI',
+    visibility: 'Open Source',
+    isPrivate: false,
+    tagline: 'Full-stack conversational AI interface built with Next.js exploring dynamic chat and modern LLM interaction patterns.',
+    description:
+      'Modern Next.js web application implementing interactive AI chat interfaces, responsive dark-mode styling, dynamic state handling, and optimized Vercel edge deployment.',
+    features: [
+      'Modern conversational chat layout engineered with Next.js App Router',
+      'Reactive message stream states with instant feedback indicators',
+      'Dark-mode native Obsidian-aligned interface styling with Tailwind CSS',
+      'Edge-deployed serverless architecture on Vercel infrastructure'
+    ],
+    techStack: ['Next.js', 'React.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
+    image: null,
+    visualType: 'aura-ai',
+    githubUrl: 'https://github.com/SachinThakur1124/aura_ai',
+    liveUrl: 'https://aura-ai-seven.vercel.app'
+  }
+];
+
+// Aliases for compatibility
+export const resumeProjects = professionalProjects;
+export const companyProjects = professionalProjects;
+export const allProjects = [...professionalProjects, ...personalProjects];
+export const projects = allProjects;
+
+export default allProjects;

@@ -7,9 +7,11 @@
   right: 0;
   background-color: $bg-secondary;
   border-bottom: 1px solid $border-default;
-  padding: 24px;
+  padding: 20px 24px 28px;
   z-index: 998;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+  max-height: calc(100vh - 72px);
+  overflow-y: auto;
 
   @include desktop {
     display: none;
@@ -19,23 +21,29 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-bottom: 16px;
+    padding-bottom: 14px;
     border-bottom: 1px solid $border-subtle;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
 
   &__title {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: $font-weight-medium;
     color: $text-tertiary;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
+    font-family: $font-mono;
   }
 
   &__close-btn {
     color: $text-secondary;
     font-size: 20px;
-    padding: 6px;
+    padding: 8px;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: $radius-sm;
     transition: color $transition-fast, background-color $transition-fast;
 
@@ -48,7 +56,7 @@
   &__nav {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
   }
 
   &__link {
@@ -56,7 +64,8 @@
     align-items: center;
     justify-content: space-between;
     padding: 12px 14px;
-    font-size: 16px;
+    min-height: 44px; // 44px touch target compliance
+    font-size: 15px;
     font-weight: $font-weight-medium;
     color: $text-primary;
     border-radius: $radius-md;
@@ -69,7 +78,7 @@
 
     &-arrow {
       color: $text-tertiary;
-      font-size: 16px;
+      font-size: 15px;
       transition: transform $transition-fast;
     }
 
@@ -83,26 +92,97 @@
     margin-top: 20px;
     padding-top: 16px;
     border-top: 1px solid $border-subtle;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 
-  &__github-btn {
+  &__action-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     width: 100%;
-    padding: 12px;
+    min-height: 44px; // 44px touch target
+    padding: 12px 16px;
     font-size: 14px;
     font-weight: $font-weight-medium;
-    background-color: $bg-tertiary;
-    color: $text-primary;
-    border: 1px solid $border-default;
     border-radius: $radius-md;
+    text-decoration: none;
     transition: all $transition-fast;
 
+    &--primary {
+      background-color: $accent;
+      color: #FFFFFF;
+      font-weight: $font-weight-semibold;
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+
+      &:hover {
+        background-color: $accent-hover;
+      }
+    }
+
+    &--secondary {
+      background-color: $bg-tertiary;
+      color: $text-primary;
+      border: 1px solid $border-default;
+
+      &:hover {
+        border-color: rgba(59, 130, 246, 0.4);
+        background-color: rgba(59, 130, 246, 0.08);
+      }
+    }
+
+    .mobile-action-icon {
+      font-size: 16px;
+    }
+  }
+
+  &__socials {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__social-link {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px; // 44px touch target
+    padding: 10px 14px;
+    font-size: 13.5px;
+    font-weight: $font-weight-medium;
+    background-color: $bg-tertiary;
+    color: $text-secondary;
+    border: 1px solid $border-default;
+    border-radius: $radius-md;
+    text-decoration: none;
+    transition: all $transition-fast;
+
+    .mobile-social-icon {
+      font-size: 15px;
+      color: $text-tertiary;
+      transition: color $transition-fast;
+    }
+
+    .mobile-social-arrow {
+      font-size: 13px;
+      color: $text-tertiary;
+    }
+
     &:hover {
+      color: $text-primary;
       border-color: rgba(59, 130, 246, 0.4);
-      color: $accent-hover;
+      background-color: rgba(59, 130, 246, 0.08);
+
+      .mobile-social-icon {
+        color: $accent;
+      }
+
+      .mobile-social-arrow {
+        color: $accent;
+      }
     }
   }
 }

@@ -8,16 +8,17 @@ export const professionalExperience = [
     id: 'appstechy',
     company: 'Appstechy',
     role: 'Full-Stack Engineer',
-    period: 'Professional Experience', // Dates to be confirmed by user
+    period: 'Mar 2025 – Present', // Verified from resume
     location: 'Mohali, India',
     isCurrent: true,
     summary:
-      'Developed and maintained production-grade web and mobile applications, engineering robust full-stack features from conception to deployment.',
+      'Architecting and shipping production-grade full-stack web and mobile applications end-to-end across React.js, Next.js, React Native, and Node.js with containerized cloud deployments.',
     achievements: [
-      'Developed and maintained production web and mobile applications across client engagements.',
-      'Delivered 6+ applications end-to-end with full-cycle technical ownership.',
-      'Designed and integrated 10+ scalable RESTful and third-party APIs.',
-      'Improved frontend load performance by approximately 30% through render optimization and asset pipeline tuning.'
+      'Built and shipped 6+ production full-stack web and mobile applications end-to-end across React.js, Next.js, React Native, and Node.js.',
+      'Integrated 10+ REST and GraphQL APIs and third-party services, cutting integration effort and reducing frontend load time by ~30% through code-splitting, caching, and query optimization.',
+      'Built a RAG-based assistant integrating vector databases (Pinecone/Chroma) and LLM APIs (OpenAI, Anthropic, Groq) to deliver context-aware, retrieval-grounded responses over product data.',
+      'Led legacy-to-modern framework migrations with zero regression in core user flows, improving maintainability and page performance.',
+      'Accelerated delivery cycles by ~25% using AI-assisted development (Cursor, Claude, Antigravity) while maintaining rigorous code quality standards.'
     ],
     technologies: [
       'React.js',
@@ -27,23 +28,25 @@ export const professionalExperience = [
       'Express.js',
       'TypeScript',
       'MongoDB',
-      'PostgreSQL'
+      'PostgreSQL',
+      'Docker',
+      'AWS'
     ]
   },
   {
     id: 'visual-media-academy',
     company: 'Visual Media Academy',
-    role: 'Full-Stack Developer',
-    period: 'Previous Experience', // Dates to be confirmed by user
-    location: 'India',
+    role: 'Full-Stack Engineer',
+    period: 'Jul 2024 – Feb 2025', // Verified from resume
+    location: 'Chandigarh, India',
     isCurrent: false,
     summary:
-      'Contributed to web application development initiatives, implementing responsive client features and backend services.',
+      'Developed responsive, user-facing web features with React and modern JavaScript, integrating frontends with backend REST APIs.',
     achievements: [
-      'Built modular user interface components and responsive client-side pages.',
-      'Assisted in data modeling, API integration, and client feedback implementation.'
+      'Developed responsive, user-facing web features with React and modern JavaScript, integrating frontends with backend REST APIs.',
+      'Built client-facing search, reusable UI component libraries, and data-driven features in an agile team, improving development speed and UI consistency.'
     ],
-    technologies: ['React.js', 'JavaScript', 'Node.js', 'HTML5', 'CSS3', 'Git']
+    technologies: ['React.js', 'JavaScript', 'Node.js', 'REST APIs', 'HTML5', 'CSS3', 'Git']
   }
 ];
 
@@ -83,7 +86,8 @@ export const contactDetails = {
   email: 'sachinthakur7814@gmail.com',
   location: 'Mohali, India',
   github: 'https://github.com/SachinThakur1124',
-  linkedin: 'https://www.linkedin.com/in/sachin-thakur-471249265/'
+  linkedin: 'https://www.linkedin.com/in/sachin-thakur-0726902a0/',
+  resumeUrl: '/assets/Sachin-Thakur-Resume.pdf'
 };
 
 export default professionalExperience;

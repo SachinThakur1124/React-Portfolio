@@ -35,9 +35,6 @@ const ProjectVisual = ({ project }) => {
             <div className="window-url font-mono">
               <span>gateway.optinetflow.io/telemetry</span>
             </div>
-            <span className="mockup-tag mockup-tag--private font-mono">
-              <FiLock /> Private B2B
-            </span>
           </div>
           <div className="mockup-body flow-preview">
             <div className="flow-nodes">
@@ -69,7 +66,7 @@ const ProjectVisual = ({ project }) => {
   }
 
   // 2. DLC - Algolia Instant Search & Faceted Filtering
-  if (visualType === 'dlc-search') {
+  if (visualType === 'dlc' || visualType === 'dlc-search') {
     return (
       <div className="project-visual project-visual--search">
         <div className="mockup-frame">
@@ -82,7 +79,6 @@ const ProjectVisual = ({ project }) => {
             <div className="window-url font-mono">
               <span>search.dlc-commerce.internal/v1</span>
             </div>
-            <span className="mockup-tag font-mono">Algolia + React</span>
           </div>
           <div className="mockup-body search-preview">
             {/* Search Input Bar Mockup */}
@@ -134,7 +130,6 @@ const ProjectVisual = ({ project }) => {
             <div className="window-url font-mono">
               <span>pipeline.itriders.internal/parser</span>
             </div>
-            <span className="mockup-tag font-mono">Python + NLP</span>
           </div>
           <div className="mockup-body pipeline-preview">
             {/* Efficiency KPI Callout */}
@@ -178,7 +173,7 @@ const ProjectVisual = ({ project }) => {
   }
 
   // 4. Crikk - Azure Voice Generation & TTS Audio Preview
-  if (visualType === 'crikk-voice') {
+  if (visualType === 'crikk' || visualType === 'crikk-voice') {
     return (
       <div className="project-visual project-visual--voice">
         <div className="mockup-frame">
@@ -191,7 +186,6 @@ const ProjectVisual = ({ project }) => {
             <div className="window-url font-mono">
               <span>studio.crikk.ai/tts-engine</span>
             </div>
-            <span className="mockup-tag font-mono">SvelteKit + Azure</span>
           </div>
           <div className="mockup-body voice-preview">
             {/* Speech Generation Bar */}
@@ -241,7 +235,6 @@ const ProjectVisual = ({ project }) => {
             <div className="window-url font-mono">
               <span>mobile.sukhiwellness.app/badges</span>
             </div>
-            <span className="mockup-tag font-mono">React Native</span>
           </div>
           <div className="mockup-body wellness-preview">
             {/* Achievement Milestone Callout */}
@@ -290,7 +283,6 @@ const ProjectVisual = ({ project }) => {
             <div className="window-url font-mono">
               <span>erp.schooladmin.internal/billing</span>
             </div>
-            <span className="mockup-tag font-mono">MERN ERP + RBAC</span>
           </div>
           <div className="mockup-body erp-preview">
             {/* ERP Navigation Tabs */}
@@ -328,6 +320,44 @@ const ProjectVisual = ({ project }) => {
 
             <div className="preview-caption preview-caption--private font-mono">
               <FiLock /> <span>Custom-Field Forms &amp; Fee Billing ERP Architecture Preview</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 7. Aura AI - Next.js Conversational AI Architecture Preview
+  if (visualType === 'aura-ai') {
+    return (
+      <div className="project-visual project-visual--aura">
+        <div className="mockup-frame">
+          <div className="mockup-header">
+            <div className="window-dots">
+              <span className="dot dot--red" />
+              <span className="dot dot--yellow" />
+              <span className="dot dot--green" />
+            </div>
+            <div className="window-url font-mono">
+              <span>aura-ai-seven.vercel.app</span>
+            </div>
+          </div>
+          <div className="mockup-body aura-preview">
+            <div className="aura-chat-header font-mono">
+              <span className="aura-status-dot" />
+              <span>Aura AI Assistant · Ready</span>
+            </div>
+            <div className="aura-messages font-mono">
+              <div className="aura-msg aura-msg--user">
+                <span>"Summarize our latest architecture decisions"</span>
+              </div>
+              <div className="aura-msg aura-msg--ai">
+                <span className="text-accent">AI: </span>
+                <span>"MERN stack normalized, Redis cache layer active, latency: 42ms."</span>
+              </div>
+            </div>
+            <div className="preview-caption font-mono">
+              <span>Interactive Next.js AI Interface · CSS Architectural Preview</span>
             </div>
           </div>
         </div>

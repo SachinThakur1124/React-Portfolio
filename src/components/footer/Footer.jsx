@@ -1,5 +1,6 @@
 import React from 'react';
-import { FiGithub, FiMail, FiMapPin, FiArrowUp } from 'react-icons/fi';
+import { FiGithub, FiMail, FiMapPin, FiDownload, FiLinkedin } from 'react-icons/fi';
+import { contactDetails } from '../../data/experience';
 import './Footer.scss';
 
 const NAV_LINKS = [
@@ -13,13 +14,6 @@ const NAV_LINKS = [
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
 
   return (
     <footer className="footer-root" role="contentinfo">
@@ -78,6 +72,16 @@ const Footer = () => {
               </li>
               <li>
                 <a
+                  href="/assets/Sachin-Thakur-Resume.pdf"
+                  download="Sachin-Thakur-Resume.pdf"
+                  className="footer-link footer-link--icon"
+                >
+                  <FiDownload aria-hidden="true" />
+                  <span>Resume PDF</span>
+                </a>
+              </li>
+              <li>
+                <a
                   href="mailto:sachinthakur7814@gmail.com"
                   className="footer-link footer-link--icon"
                 >
@@ -85,6 +89,19 @@ const Footer = () => {
                   <span>sachinthakur7814@gmail.com</span>
                 </a>
               </li>
+              {contactDetails.linkedin && (
+                <li>
+                  <a
+                    href={contactDetails.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="footer-link footer-link--icon"
+                  >
+                    <FiLinkedin aria-hidden="true" />
+                    <span>LinkedIn</span>
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
         </div>
@@ -92,21 +109,11 @@ const Footer = () => {
         {/* Divider */}
         <div className="footer-divider" />
 
-        {/* Bottom Bar: Copyright & Back to Top */}
+        {/* Bottom Bar: Copyright */}
         <div className="footer-bottom">
           <p className="footer-copyright">
             &copy; {currentYear} Sachin Thakur. All rights reserved. Designed &amp; developed with React &amp; Sass.
           </p>
-
-          <button
-            type="button"
-            className="footer-back-to-top"
-            onClick={scrollToTop}
-            aria-label="Back to top of page"
-          >
-            <span>Back to top</span>
-            <FiArrowUp className="footer-back-to-top__icon" aria-hidden="true" />
-          </button>
         </div>
       </div>
     </footer>

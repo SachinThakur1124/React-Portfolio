@@ -105,18 +105,129 @@
   display: flex;
   align-items: center;
   gap: 12px;
+}
 
-  &__github {
-    @include mobile {
-      display: none;
+.navbar-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: $font-weight-medium;
+  color: #FFFFFF;
+  background-color: $accent;
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  padding: 7px 16px;
+  border-radius: $radius-full;
+  text-decoration: none;
+  transition: all $transition-fast;
+  white-space: nowrap;
+  box-shadow: 0 2px 10px rgba(59, 130, 246, 0.28);
+
+  &__icon {
+    font-size: 13px;
+    transition: transform $transition-fast;
+  }
+
+  &:hover {
+    background-color: $accent-hover;
+    color: #FFFFFF;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.45);
+
+    .navbar-cta-btn__icon {
+      transform: translate(1px, -1px);
     }
   }
 
-  &__contact {
-    @include mobile {
-      display: none;
+  &:active {
+    transform: translateY(0);
+  }
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.navbar-icon-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.nav-icon-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: $text-secondary;
+  background-color: transparent;
+  border: 1px solid transparent;
+  transition: all $transition-fast;
+  text-decoration: none;
+
+  &__icon {
+    font-size: 17px;
+    transition: transform $transition-fast, color $transition-fast;
+  }
+
+  &:hover {
+    color: #FFFFFF;
+    background-color: rgba(59, 130, 246, 0.12);
+    border-color: rgba(59, 130, 246, 0.35);
+
+    .nav-icon-btn__icon {
+      color: #93C5FD;
+      transform: scale(1.1);
     }
   }
+
+  &:focus-visible {
+    outline: 2px solid $accent;
+    outline-offset: 2px;
+  }
+}
+
+.nav-icon-tooltip {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  background-color: #111114;
+  color: #FFFFFF;
+  border: 1px solid $border-default;
+  font-size: 11px;
+  font-weight: $font-weight-medium;
+  padding: 4px 8px;
+  border-radius: $radius-sm;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+  z-index: 1001;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 4px;
+    border-style: solid;
+    border-color: transparent transparent #111114 transparent;
+  }
+}
+
+.nav-icon-btn:hover .nav-icon-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 .navbar-toggle-btn {
